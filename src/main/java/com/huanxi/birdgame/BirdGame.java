@@ -1,14 +1,14 @@
 package com.huanxi.birdgame;
 
-import com.huanxi.birdgame.gameobject.BackGround;
-import com.huanxi.birdgame.gameobject.Bird;
-import com.huanxi.birdgame.gameobject.Ground;
+import com.huanxi.birdgame.gameobject.*;
 import com.huanxi.core.hxgame.HXGame;
 
 import javax.swing.*;
+import java.util.logging.Level;
 
 public class BirdGame extends JFrame {
     HXGame hxGame;
+    public static int level = 1;
 
     public static BirdGame start() {
         return new BirdGame();
@@ -22,8 +22,14 @@ public class BirdGame extends JFrame {
         hxGame.init();
         //添加游戏物体
         hxGame.addGameObject(new BackGround());
-        hxGame.addGameObject(new Ground());
+        //添加两个柱子对
+        Columns columns1 = new Columns();
+//        Columns columns2=new Columns();
+        hxGame.addGameObject(columns1);
+        hxGame.addGameObject(columns1.getColumnUp());
+        hxGame.addGameObject(columns1.getColumnDown());
         hxGame.addGameObject(new Bird());
+        hxGame.addGameObject(new Ground());
         hxGame.start();
     }
 }

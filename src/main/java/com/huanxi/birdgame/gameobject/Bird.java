@@ -21,7 +21,7 @@ public class Bird extends GameObject {
             images[i] = ImageUtil.getImage(i + ".png");
         width = images[0].getWidth(null);
         height = images[0].getWidth(null);
-        this.x = HXGame.getHxGame().getGameFrame().getMAIN_FORM_WIDTH() / 2 - width;
+        this.x = HXGame.getHxGame().getGameFrame().getMAIN_FORM_WIDTH() / 2 - width-100;
         this.y = HXGame.getHxGame().getGameFrame().getMAIN_FORM_HEIGHT() / 2 - height;
         animation = new Animation(images);
     }
@@ -32,7 +32,7 @@ public class Bird extends GameObject {
     }
 
     public void doController() {
-        TimeUtil.delay(7,old_time,()->{
+        TimeUtil.delay(5,old_time,()->{
             animation.setIndex(animation.getIndex() + 1);
             if (animation.getIndex() >= animation.getImages().length) animation.setIndex(0);
         });
