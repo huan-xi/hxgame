@@ -1,6 +1,7 @@
 package com.huanxi.core.hxgame;
 
 import com.huanxi.core.filter.controllerfilter.GameController;
+import com.huanxi.core.filter.controllerfilter.boxfilter.gravitybox.GravityBox;
 import com.huanxi.core.filter.renderfilter.GameRender;
 import com.huanxi.core.util.Constant;
 
@@ -49,6 +50,7 @@ public class HXGame {
     public void addGameObject(GameObject gameObject) {
         gameController.addGameObject(gameObject);
         gameRender.addGameObject(gameObject);
+
     }
 
     public int getGame_status() {

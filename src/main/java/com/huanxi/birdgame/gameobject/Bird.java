@@ -1,5 +1,6 @@
 package com.huanxi.birdgame.gameobject;
 
+import com.huanxi.core.filter.controllerfilter.boxfilter.gravitybox.GravityBox;
 import com.huanxi.core.hxgame.HXGame;
 import com.huanxi.core.hxgame.GameObject;
 import com.huanxi.core.objectbox.animationbox.Animation;
@@ -10,7 +11,7 @@ import com.huanxi.core.util.TimeUtil;
 
 import java.awt.*;
 
-public class Bird extends GameObject {
+public class Bird extends GameObject implements GravityBox {
     private Animation animation;
     private OldTime old_time = new OldTime();
 

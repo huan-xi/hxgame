@@ -1,7 +1,9 @@
 package com.huanxi.core.filter.controllerfilter;
 
 
-import com.huanxi.core.filter.controllerfilter.boxfilter.GameObjectControler;
+import com.huanxi.core.filter.controllerfilter.boxfilter.GameObjectController;
+import com.huanxi.core.filter.controllerfilter.boxfilter.gravitybox.GravityBox;
+import com.huanxi.core.filter.controllerfilter.boxfilter.gravitybox.GravityControllerFilter;
 import com.huanxi.core.hxgame.GameObject;
 
 import java.util.HashMap;
@@ -21,9 +23,14 @@ public class GameController {
 
     public GameController() {
         //初始化控制链
-        controllerFilters.put(GameObjectControler.FLAG,new GameObjectControler());
+        controllerFilters.put(GameObjectController.FLAG, new GameObjectController());
+        //创建重力控制链
+        controllerFilters.put(GravityControllerFilter.FLAG, new GravityControllerFilter());
     }
-    public void addGameObject(GameObject gameObject){
-        controllerFilters.get(GameObjectControler.FLAG).addGameObject(gameObject);
+
+    public void addGameObject(GameObject gameObject) {
+        controllerFilters.get(GameObjectController.FLAG).addGameObject(gameObject);
+        if (gameObject instanceof GravityBox)
+            controllerFilters.get(GravityControllerFilter.FLAG).addGameObject(gameObject);
     }
 }
