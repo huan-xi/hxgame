@@ -1,8 +1,11 @@
 package com.huanxi.core.filter.controllerfilter;
 
 
-public interface ControllerFilter {
+
+public interface ControllerFilter<T extends ControllerBox> {
     void doController();
-//        void addGameObject(? extends ControllerBox controllerBox);
-    void addGameObject(ControllerBox controllerBox);
+
+    void addGameObject(T controllerBox);
+
+//    void addGameObject(ControllerBox controllerBox);
 }

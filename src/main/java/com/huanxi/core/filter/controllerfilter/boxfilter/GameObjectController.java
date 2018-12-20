@@ -1,13 +1,12 @@
 package com.huanxi.core.filter.controllerfilter.boxfilter;
 
-import com.huanxi.core.filter.controllerfilter.ControllerBox;
 import com.huanxi.core.filter.controllerfilter.ControllerFilter;
 import com.huanxi.core.hxgame.GameObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameObjectController implements ControllerFilter {
+public class GameObjectController implements ControllerFilter<GameObject> {
     public static final String FLAG = "GameObjectController";
     List<GameObject> gameObjects = new ArrayList<GameObject>();
 
@@ -19,7 +18,7 @@ public class GameObjectController implements ControllerFilter {
     }
 
     @Override
-    public void addGameObject(ControllerBox gameObject) {
-        gameObjects.add((GameObject) gameObject);
+    public void addGameObject(GameObject gameObject) {
+        gameObjects.add(gameObject);
     }
 }

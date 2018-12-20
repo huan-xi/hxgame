@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 碰撞控制链
  */
-public class CollisionControllerFilter implements ControllerFilter {
+public class CollisionControllerFilter implements ControllerFilter<ControllerBox> {
     public static final String FLAG = "CollisionControllerFilter";
     //可碰撞体
     List<CollisionBoxer> ableCollisionBoxes = new ArrayList<CollisionBoxer>();
