@@ -36,9 +36,10 @@ public class GameFrame extends JFrame {
 		this.title = title;
 	}
 
-	public void setPanel(JPanel panel) {
+	public void setPanel(GamePanel panel) {
 		this.getContentPane().add(panel);
+		this.addKeyListener(panel);
+		this.addMouseListener(panel);
 	}
-
 
 }

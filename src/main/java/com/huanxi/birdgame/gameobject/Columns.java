@@ -1,9 +1,14 @@
 package com.huanxi.birdgame.gameobject;
 
+import com.huanxi.birdgame.BirdGame;
 import com.huanxi.core.hxgame.GameObject;
 import com.huanxi.core.hxgame.HXGame;
+import com.huanxi.core.others.OldTime;
+import com.huanxi.core.util.TimeUtil;
+import com.huanxi.core.util.Util;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Columns extends GameObject {
     Column columnUp;
@@ -14,14 +19,12 @@ public class Columns extends GameObject {
     public Columns(int x) {
         this.x = x;
         columnUp = new Column("column_up.png", x);
-        columnUp.y = -450;
-
+        columnUp.y = -350;
         columnDown = new Column("column_down.png", x);
         //最大450
-        columnDown.y = 450;
+        columnDown.y = columnUp.y + 728;
     }
 
-    //随机
     public Column getColumnUp() {
         return columnUp;
     }
@@ -35,16 +38,22 @@ public class Columns extends GameObject {
 
     }
 
+    OldTime oldTime = new OldTime();
+
     @Override
     public void doController() {
-        x--;
-        columnDown.x = columnUp.x = x;
-        if (columnDown.width + x == 0) {//判断柱子窗体左边出界面
-            x = HXGame.getHxGame().getGameFrame().getMAIN_FORM_WIDTH();//柱子移到窗体最右边
-//            int yMin = -(height/2-gap/2);//柱子y坐标最小值
-//            int yMax = (BirdGame.HEIGHT-146)-(height/2+gap/2);//柱子y坐标最大值
-//            y = (int)(Math.random()*(yMax-yMin+1)+yMin);//[a,b]之间的随机数
-        }
-
+        TimeUtil.delay(BirdGame.getGameSpeed(), oldTime, () -> {
+            x--;
+            columnDown.x = columnUp.x = x;
+            if (Bird.getBird().isAlive() && columnDown.width + x == Bird.getBird().x)
+                BirdGame.grade++;
+            if (columnDown.width + x == 0) {
+                x = HXGame.getHxGame().getGameFrame().getMAIN_FORM_WIDTH();
+                columnUp.y = Util.getRand(-200, -550);
+                int gap = Util.getRand(200, 150);
+                columnDown.y = (528 + columnUp.y + gap);
+            }
+        });
     }
+
 }

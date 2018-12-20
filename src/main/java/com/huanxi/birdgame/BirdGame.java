@@ -1,15 +1,14 @@
 package com.huanxi.birdgame;
 
 import com.huanxi.birdgame.gameobject.*;
-import com.huanxi.core.filter.controllerfilter.boxfilter.gravitybox.GravityBox;
 import com.huanxi.core.hxgame.HXGame;
 
 import javax.swing.*;
-import java.util.logging.Level;
 
 public class BirdGame extends JFrame {
     HXGame hxGame;
     public static int level = 1;
+    public static int grade=0;
 
     public static BirdGame start() {
         return new BirdGame();
@@ -25,15 +24,21 @@ public class BirdGame extends JFrame {
         hxGame.addGameObject(new BackGround());
         //添加两个柱子对
         Columns columns1 = new Columns(hxGame.getGameFrame().getMAIN_FORM_WIDTH());
-        Columns columns2 = new Columns(hxGame.getGameFrame().getMAIN_FORM_WIDTH() * 3 / 2 + 39);
+        Columns columns2 = new Columns(hxGame.getGameFrame().getMAIN_FORM_WIDTH()*3/2+39);
         hxGame.addGameObject(columns1);
         hxGame.addGameObject(columns1.getColumnUp());
         hxGame.addGameObject(columns1.getColumnDown());
         hxGame.addGameObject(columns2);
         hxGame.addGameObject(columns2.getColumnUp());
         hxGame.addGameObject(columns2.getColumnDown());
-        hxGame.addGameObject(new Bird());
+        hxGame.addGameObject(Bird.getBird());
         hxGame.addGameObject(new Ground());
+        hxGame.addGameObject(new Text());
+        hxGame.addGameObject(new GameStatus());
         hxGame.start();
+    }
+
+    public static int getGameSpeed() {
+        return level > 6 ? 0 : 6- level;
     }
 }

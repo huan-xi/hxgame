@@ -1,5 +1,6 @@
 package com.huanxi.core.filter.controllerfilter.boxfilter;
 
+import com.huanxi.core.filter.controllerfilter.ControllerBox;
 import com.huanxi.core.filter.controllerfilter.ControllerFilter;
 import com.huanxi.core.hxgame.GameObject;
 
@@ -18,7 +19,7 @@ public class GameObjectController implements ControllerFilter {
     }
 
     @Override
-    public void addGameObject(GameObject gameObject) {
-        gameObjects.add(gameObject);
+    public void addGameObject(ControllerBox gameObject) {
+        gameObjects.add((GameObject) gameObject);
     }
 }

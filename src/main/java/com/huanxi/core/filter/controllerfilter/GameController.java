@@ -2,8 +2,10 @@ package com.huanxi.core.filter.controllerfilter;
 
 
 import com.huanxi.core.filter.controllerfilter.boxfilter.GameObjectController;
-import com.huanxi.core.filter.controllerfilter.boxfilter.gravitybox.GravityBox;
-import com.huanxi.core.filter.controllerfilter.boxfilter.gravitybox.GravityControllerFilter;
+import com.huanxi.core.filter.controllerfilter.boxfilter.collisionbox.CollisionControllerFilter;
+import com.huanxi.core.filter.controllerfilter.boxfilter.collisionbox.collisiont.CollisionBox;
+import com.huanxi.core.filter.controllerfilter.boxfilter.movementbox.MovementBox;
+import com.huanxi.core.filter.controllerfilter.boxfilter.movementbox.MovementControllerFilter;
 import com.huanxi.core.hxgame.GameObject;
 
 import java.util.HashMap;
@@ -25,12 +27,16 @@ public class GameController {
         //初始化控制链
         controllerFilters.put(GameObjectController.FLAG, new GameObjectController());
         //创建重力控制链
-        controllerFilters.put(GravityControllerFilter.FLAG, new GravityControllerFilter());
+        controllerFilters.put(MovementControllerFilter.FLAG, new MovementControllerFilter());
+        //创建碰撞检测链
+        controllerFilters.put(CollisionControllerFilter.FLAG, new CollisionControllerFilter());
     }
 
     public void addGameObject(GameObject gameObject) {
         controllerFilters.get(GameObjectController.FLAG).addGameObject(gameObject);
-        if (gameObject instanceof GravityBox)
-            controllerFilters.get(GravityControllerFilter.FLAG).addGameObject(gameObject);
+        if (gameObject instanceof MovementBox)
+            controllerFilters.get(MovementControllerFilter.FLAG).addGameObject(gameObject);
+        if (gameObject instanceof CollisionBox)
+            controllerFilters.get(CollisionControllerFilter.FLAG).addGameObject(gameObject);
     }
 }

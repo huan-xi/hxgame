@@ -2,8 +2,7 @@ package com.huanxi.core.util;
 
 import java.awt.*;
 
-import com.huanxi.birdgame.gameobject.BackGround;
-import com.huanxi.core.objectbox.animationbox.Animation;
+import com.huanxi.core.hxgame.Animation;
 
 public class RenderUtil {
 

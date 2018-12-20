@@ -1,8 +1,8 @@
 package com.huanxi.core.hxgame;
 
 import com.huanxi.core.filter.controllerfilter.GameController;
-import com.huanxi.core.filter.controllerfilter.boxfilter.gravitybox.GravityBox;
 import com.huanxi.core.filter.renderfilter.GameRender;
+import com.huanxi.core.rocker.GameRocker;
 import com.huanxi.core.util.Constant;
 
 /**
@@ -12,8 +12,10 @@ public class HXGame {
     private int MAIN_FORM_WIDTH = 0;
     public static int game_status = Constant.GAME_STATUS_READY;
     private static HXGame hxGame;
-    public static final int sleep_time = 10; //睡眠时间
+    public static final int sleep_time = 1; //睡眠时间
+    public static int FPS; //每秒刷新次数
     public static int times = 0; //游戏开始运行次数
+    public static int time = 0; //游戏开始运行毫秒数
     private GameFrame gameFrame;
     private GamePanel gamePanel;
     private GameRender gameRender;
@@ -41,15 +43,53 @@ public class HXGame {
     }
 
     public void start() {
-        //启动渲染线程
         gameFrame.setVisible(true);
+        //启动渲染线程
         gamePanel.start();
+        startCountTime();
+        startComputerFPS();
+    }
+
+    private void startComputerFPS() {
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    int times = hxGame.times;
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    FPS = hxGame.times - times;
+                }
+            }
+        }.start();
+    }
+
+    //开始计算计时
+    public void startCountTime() {
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    int times = hxGame.times;
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    time += 10;
+                }
+            }
+        }.start();
     }
 
     //添加游戏物体
     public void addGameObject(GameObject gameObject) {
         gameController.addGameObject(gameObject);
         gameRender.addGameObject(gameObject);
+        GameRocker.getGameRocker().addGameObject(gameObject);
 
     }
 
