@@ -6,6 +6,4 @@ public interface ControllerFilter<T extends ControllerBox> {
     void doController();
 
     void addGameObject(T controllerBox);
-
-//    void addGameObject(ControllerBox controllerBox);
 }

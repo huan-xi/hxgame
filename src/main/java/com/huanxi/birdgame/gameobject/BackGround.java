@@ -10,7 +10,7 @@ public class BackGround extends GameObject {
     Image images;
 
     public BackGround() {
-        images = ImageUtil.getImage("bg.png");
+        images = ImageUtil.getImage("images/bg.png");
         x = 0;
         y = 0;
     }
@@ -22,6 +22,7 @@ public class BackGround extends GameObject {
 
     @Override
     public void doController() {
-
+        x--;
+        if (x<=-960)x=0;
     }
 }

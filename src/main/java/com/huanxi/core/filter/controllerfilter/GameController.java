@@ -1,6 +1,7 @@
 package com.huanxi.core.filter.controllerfilter;
 
 
+import com.huanxi.birdgame.gameobject.Player;
 import com.huanxi.core.filter.controllerfilter.boxfilter.GameObjectController;
 import com.huanxi.core.filter.controllerfilter.boxfilter.collisionbox.CollisionControllerFilter;
 import com.huanxi.core.filter.controllerfilter.boxfilter.collisionbox.collisiont.CollisionBox;
@@ -38,5 +39,13 @@ public class GameController {
             controllerFilters.get(MovementControllerFilter.FLAG).addGameObject(gameObject);
         if (gameObject instanceof CollisionBox)
             controllerFilters.get(CollisionControllerFilter.FLAG).addGameObject(gameObject);
+    }
+
+    /*
+    * 碰撞检测
+    * */
+    public boolean hit(GameObject gameObject) {
+        CollisionControllerFilter collisionControllerFilter= (CollisionControllerFilter) controllerFilters.get(CollisionControllerFilter.FLAG);
+      return  collisionControllerFilter.hit(gameObject);
     }
 }

@@ -1,5 +1,7 @@
 package com.huanxi.core.hxgame;
 
+import com.huanxi.birdgame.gameobject.Column;
+import com.huanxi.birdgame.gameobject.Columns;
 import com.huanxi.core.filter.controllerfilter.GameController;
 import com.huanxi.core.filter.renderfilter.GameRender;
 import com.huanxi.core.rocker.GameRocker;
@@ -92,6 +94,15 @@ public class HXGame {
         GameRocker.getGameRocker().addGameObject(gameObject);
 
     }
+    public void addColumns(Columns columns) {
+        hxGame.addGameObject(columns);
+        for (Column column:columns.getColumnList()) {
+            hxGame.addGameObject(column);
+        }
+        hxGame.addGameObject(columns.getStart());
+        hxGame.addGameObject(columns.getEnd());
+
+    }
 
     public int getGame_status() {
         return game_status;
@@ -138,5 +149,13 @@ public class HXGame {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public GameController getGameController() {
+        return gameController;
+    }
+
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
     }
 }

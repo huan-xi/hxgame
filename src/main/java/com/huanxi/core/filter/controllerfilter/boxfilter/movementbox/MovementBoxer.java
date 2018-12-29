@@ -3,8 +3,6 @@ package com.huanxi.core.filter.controllerfilter.boxfilter.movementbox;
 import com.huanxi.core.filter.controllerfilter.ControllerBox;
 import com.huanxi.core.hxgame.GameObject;
 
-import java.awt.*;
-
 /**
  * 运动体
  */

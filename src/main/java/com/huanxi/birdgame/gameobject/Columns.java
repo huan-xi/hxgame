@@ -1,36 +1,23 @@
 package com.huanxi.birdgame.gameobject;
 
-import com.huanxi.birdgame.BirdGame;
 import com.huanxi.core.hxgame.GameObject;
-import com.huanxi.core.hxgame.HXGame;
-import com.huanxi.core.others.OldTime;
-import com.huanxi.core.util.TimeUtil;
-import com.huanxi.core.util.Util;
-
 import java.awt.*;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Columns extends GameObject {
-    Column columnUp;
-    Column columnDown;
-    public static final int UpMaxY = -450;
-    public static final int MaxGap = 0;
 
-    public Columns(int x) {
+    List<Column> columnList = new ArrayList<Column>();
+    Column start;
+    Column end;
+    public Columns(int x,int len) {
         this.x = x;
-        columnUp = new Column("column_up.png", x);
-        columnUp.y = -350;
-        columnDown = new Column("column_down.png", x);
-        //最大450
-        columnDown.y = columnUp.y + 728;
-    }
-
-    public Column getColumnUp() {
-        return columnUp;
-    }
-
-    public Column getColumnDown() {
-        return columnDown;
+        start = new Column("images/g_start.png", x);
+        columnList.add(new Column("images/ground.png", start.x + 76));
+        for (int i=0;i<len;i++){
+            columnList.add(new Column("images/ground.png", columnList.get(columnList.size() - 1).x + 77));
+        }
+        end=new Column("images/g_end.png",columnList.get(columnList.size() - 1).x + 77);
     }
 
     @Override
@@ -38,22 +25,40 @@ public class Columns extends GameObject {
 
     }
 
-    OldTime oldTime = new OldTime();
-
     @Override
     public void doController() {
-        TimeUtil.delay(BirdGame.getGameSpeed(), oldTime, () -> {
-            x--;
-            columnDown.x = columnUp.x = x;
-            if (Bird.getBird().isAlive() && columnDown.width + x == Bird.getBird().x)
-                BirdGame.grade++;
-            if (columnDown.width + x == 0) {
-                x = HXGame.getHxGame().getGameFrame().getMAIN_FORM_WIDTH();
-                columnUp.y = Util.getRand(-200, -550);
-                int gap = Util.getRand(200, 150);
-                columnDown.y = (528 + columnUp.y + gap);
-            }
-        });
+        x--;
+        start.x=x;
+        columnList.get(0).x=start.x+=77;
+        for (int i=1;i<columnList.size();i++){
+            columnList.get(i).x=columnList.get(i - 1).x + 77;
+        }
+        end.x=columnList.get(columnList.size() - 1).x + 77;
+        if (end.x<=-60)
+            this.x=1000;
     }
 
+    public List<Column> getColumnList() {
+        return columnList;
+    }
+
+    public void setColumnList(List<Column> columnList) {
+        this.columnList = columnList;
+    }
+
+    public Column getStart() {
+        return start;
+    }
+
+    public void setStart(Column start) {
+        this.start = start;
+    }
+
+    public Column getEnd() {
+        return end;
+    }
+
+    public void setEnd(Column end) {
+        this.end = end;
+    }
 }

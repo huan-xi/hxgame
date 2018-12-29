@@ -14,18 +14,18 @@ import java.awt.*;
 
 public class Ground extends GameObject implements CollisionBox {
     Image image;
+    Image start;
+    Image end;
 
     public Ground() {
-        image = ImageUtil.getImage("ground.png");
-        x = 0;
-        width = image.getWidth(null);
-        height = image.getHeight(null);
-        y = HXGame.getHxGame().getGameFrame().getMAIN_FORM_HEIGHT() - height;
+        image = ImageUtil.getImage("images/ground.png");
+        x = 150;
     }
 
     @Override
     public void doRender(Graphics g) {
         RenderUtil.renderImage(this, g, image);
+        g.drawImage(image, x+123, 300, null);
     }
 
     OldTime oldTime = new OldTime();
@@ -36,8 +36,8 @@ public class Ground extends GameObject implements CollisionBox {
         TimeUtil.delay(BirdGame.getGameSpeed(), oldTime, new Runnable() {
             @Override
             public void run() {
-                x--;
-                if (width == HXGame.getHxGame().getGameFrame().getMAIN_FORM_WIDTH() - x) x = 0;
+//                x--;
+//                if (width == HXGame.getHxGame().getGameFrame().getMAIN_FORM_WIDTH() - x) x = 0;
             }
         });
 

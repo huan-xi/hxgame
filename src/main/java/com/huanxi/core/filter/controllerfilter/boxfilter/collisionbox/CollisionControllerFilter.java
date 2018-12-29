@@ -4,7 +4,9 @@ import com.huanxi.core.filter.controllerfilter.ControllerBox;
 import com.huanxi.core.filter.controllerfilter.ControllerFilter;
 import com.huanxi.core.filter.controllerfilter.boxfilter.collisionbox.collisiont.CollisionBox;
 import com.huanxi.core.filter.controllerfilter.boxfilter.collisionbox.collisiont.CollisionBoxer;
+import com.huanxi.core.hxgame.GameObject;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,5 +39,15 @@ public class CollisionControllerFilter implements ControllerFilter<ControllerBox
             ableCollisionBoxes.add(collisionBoxer);
         if (collisionBoxer.collision())
             collisionBoxers.add(collisionBoxer);
+    }
+
+    public boolean hit(GameObject gameObject) {
+        for (int i = 0; i < ableCollisionBoxes.size(); i++) {
+            Rectangle rectangle=ableCollisionBoxes.get(i).getR();
+//            Rectangle rectangle1=new Rectangle(rectangle.x,rectangle.y-10,rectangle.width,rectangle.y);
+            if (rectangle.intersects(gameObject))
+               return true;
+        }
+        return false;
     }
 }
